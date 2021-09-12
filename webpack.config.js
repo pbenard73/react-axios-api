@@ -12,7 +12,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'react-axios-api',
     libraryTarget: 'commonjs-module'
   },
   plugins: [new CleanWebpackPlugin()],

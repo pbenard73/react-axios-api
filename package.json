@@ -1,8 +1,8 @@
 {
   "name": "react-axios-api",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "React toolkit for api querying with axios",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf ./dist; ./node_modules/webpack/bin/webpack.js"
@@ -13,6 +13,11 @@
     "axios"
   ],
   "author": "Patrick BENARD <pbenard73@gmail.com>",
+  "homepage": "https://github.com/pbenard73/react-axios-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbenard73/react-axios-api"
+  },
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
