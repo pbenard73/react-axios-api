@@ -1,0 +1,16 @@
+{
+  "name": "react-axios-api",
+  "version": "1.0.0",
+  "description": "React toolkit for api querying with axios",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "api",
+    "axios"
+  ],
+  "author": "Patrick BENARD <pbenard73@gmail.com>",
+  "license": "ISC"
+}
