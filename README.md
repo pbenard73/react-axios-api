@@ -9,7 +9,12 @@ const api ={
   main: {path: '/getXX'},
   second: {path: '/getXX', method: 'post'},
   third: {path: '/getId/:id'},
-  quatro: {path: '/post/:id', method: 'post'}
+  quatro: {
+    path: '/post/:id',
+    method: 'post',
+    body: {token:'myAlwaysSendToken'},
+    headers: {'customHeader': 'headerValue'}
+  }
 }
 
 export default api
@@ -17,7 +22,7 @@ export default api
 export const { main, second, third, quatro } = makeApi(api, 'localhost:5000')
 ```
 
-## Usage in component
+## Explanations
 
 Take care about the arguments:
 
@@ -25,6 +30,34 @@ Take care about the arguments:
 * body object
 * axios extra options
 
+```js
+  quatro(
+    {id: 'one', urlQueryParam: 'two'},
+    {aBodyValue: 'value'},
+    {
+      headers: {'newHeaderKey': 'newHeaderValue'},
+      /* new key values will be passed to axios */
+    }
+```
+
+will generate
+
+```js
+  axios.request({
+    url: 'localhost:5000/getId/one?urlQueryParam=two',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded', // only for 'put' 'post' 'delete' methods
+      'customHeader': 'headerValue',
+      'newHeaderKey': 'newHeaderValue'
+    },
+    data: {aBodyValue: 'value'},
+    withCredentials: true,
+  })
+
+```
+
+## Usage in component
 
 ```js
 import {useEffect } from 'react'
