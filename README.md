@@ -67,6 +67,13 @@ const App = () => {
 
   useEffect(() => {
       main() // return promise
+
+      /**
+       * If need to abort
+       */  
+
+      main.cancel()
+
   }, [])
 
   let {isCalling, data, error} = quatro.useHook({id: '13'}, {content: 'my body variable'})

@@ -1,6 +1,6 @@
 {
   "name": "react-axios-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React toolkit for api querying with axios",
   "main": "./dist/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "axios": "^0.21.1",
+    "axios": "^0.24",
     "prop-types": "^15.7.2",
     "qs": "^6.10.1",
     "react": ">16.0.0"
