@@ -1,11 +1,11 @@
 {
   "name": "react-axios-api",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React toolkit for api querying with axios",
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./dist; ./node_modules/webpack/bin/webpack.js"
+    "build": "npx tsc;rm -rf ./dist; ./node_modules/webpack/bin/webpack.js;cp build/*.d.ts dist/.; rm -rf build"
   },
   "keywords": [
     "react",

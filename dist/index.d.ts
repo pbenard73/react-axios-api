@@ -1,4 +1,4 @@
-interface ApiPoolItem {
+export interface ApiPoolItem {
     path: string;
     method?: string;
     domain?: string;
@@ -6,21 +6,20 @@ interface ApiPoolItem {
     headers?: any;
     options?: any;
 }
-interface ApiPool {
+export interface ApiPool {
     [routeName: string]: ApiPoolItem;
 }
-interface HookItem {
+export interface HookItem {
     isCalling: boolean;
     data: any | null;
     error: any | null;
 }
-interface ApiItem {
+export interface ApiItem {
     (options?: any, body?: any, givenExtraOptions?: any): Promise<any>;
     url(options?: any): string;
     useHook(options?: any, body?: any, givenExtraOptions?: any): HookItem;
 }
-interface GeneratedApi {
+export interface GeneratedApi {
     [routeName: string]: ApiItem;
 }
 export declare const makeApi: (apiPool?: ApiPool, prefix?: string) => GeneratedApi;
-export {};
