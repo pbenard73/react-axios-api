@@ -34,7 +34,7 @@ const makeApiFx = (apiPool:ApiPool = {}, prefix:string = ""):GeneratedApi => {
   let data:GeneratedApi = {};
 
   Object.keys(apiPool).forEach((routeName) => {
-    const route = apiPool[routeName];
+    const route = {...apiPool[routeName]};
     route.path = prefix + route.path;
 
     const callFunction = (options?: any, body?: any, givenExtraOptions?: any) => Api.call(route, options, body, givenExtraOptions);

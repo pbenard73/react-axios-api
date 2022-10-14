@@ -1,6 +1,6 @@
 {
   "name": "react-axios-api",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React toolkit for api querying with axios",
   "main": "./dist/index.js",
   "scripts": {
