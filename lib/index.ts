@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import merge from 'merge-deep';
 import Api from "./Api";
 
 // declare module 'react-axios-api';
@@ -20,8 +21,13 @@ export interface HookItem {
   data: any | null
   error: any | null
 }
+
+export interface ExtraOptions {
+  [name:string]: any
+}
+
 export interface ApiItem {
-  (options?: any, body?: any, givenExtraOptions?: any): Promise<any>
+  (options?: any, body?: any, givenExtraOptions?: ExtraOptions): Promise<any>
   url(options?: any):string
   useHook(options?: any, body?: any, givenExtraOptions?: any): HookItem
 }
@@ -30,14 +36,16 @@ export interface GeneratedApi {
   [routeName:string]: ApiItem
 }
 
-const makeApiFx = (apiPool:ApiPool = {}, prefix:string = ""):GeneratedApi => {
+const makeApiFx = (apiPool:ApiPool = {}, prefix:string = "", extraOptions:ExtraOptions = {}):GeneratedApi => {
   let data:GeneratedApi = {};
 
   Object.keys(apiPool).forEach((routeName) => {
     const route = {...apiPool[routeName]};
     route.path = prefix + route.path;
 
-    const callFunction = (options?: any, body?: any, givenExtraOptions?: any) => Api.call(route, options, body, givenExtraOptions);
+    const mergedOptions = (givenOptions = {}) => merge(extraOptions, givenOptions)
+
+    const callFunction = (options?: any, body?: any, givenExtraOptions?: ExtraOptions) => Api.call(route, options, body, mergedOptions(givenExtraOptions));
 
     callFunction.url = (options?: any) => Api.url(route, options);
 
@@ -47,7 +55,7 @@ const makeApiFx = (apiPool:ApiPool = {}, prefix:string = ""):GeneratedApi => {
       const [error, setError] = useState();
 
       useEffect(() => {
-        Api.call(route, options, body, givenExtraOptions)
+        Api.call(route, options, body, mergedOptions(givenExtraOptions))
           .then((apidata) => setSuccess(apidata))
           .catch((e) => setError(e))
           .finally(() => setCalling(false));

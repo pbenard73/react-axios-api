@@ -14,12 +14,15 @@ export interface HookItem {
     data: any | null;
     error: any | null;
 }
+export interface ExtraOptions {
+    [name: string]: any;
+}
 export interface ApiItem {
-    (options?: any, body?: any, givenExtraOptions?: any): Promise<any>;
+    (options?: any, body?: any, givenExtraOptions?: ExtraOptions): Promise<any>;
     url(options?: any): string;
     useHook(options?: any, body?: any, givenExtraOptions?: any): HookItem;
 }
 export interface GeneratedApi {
     [routeName: string]: ApiItem;
 }
-export declare const makeApi: (apiPool?: ApiPool, prefix?: string) => GeneratedApi;
+export declare const makeApi: (apiPool?: ApiPool, prefix?: string, extraOptions?: ExtraOptions) => GeneratedApi;
