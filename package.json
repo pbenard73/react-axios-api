@@ -1,6 +1,6 @@
 {
   "name": "react-axios-api",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "React toolkit for api querying with axios",
   "main": "./dist/index.js",
   "scripts": {
@@ -21,15 +21,15 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24",
-    "merge-deep": "^3.0.3",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
-    "@types/merge-deep": "^3.0.0",
+    "@types/ramda": "^0.28.18",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0",
     "prop-types": "^15.7.2",

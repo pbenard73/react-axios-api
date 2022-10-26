@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import merge from 'merge-deep';
+import { mergeDeepLeft } from 'ramda'
+
 import Api from "./Api";
 
 // declare module 'react-axios-api';
@@ -43,7 +44,7 @@ const makeApiFx = (apiPool:ApiPool = {}, prefix:string = "", extraOptions:ExtraO
     const route = {...apiPool[routeName]};
     route.path = prefix + route.path;
 
-    const mergedOptions = (givenOptions = {}) => merge(extraOptions, givenOptions)
+    const mergedOptions = (givenOptions = {}) => mergeDeepLeft(extraOptions, givenOptions)
 
     const callFunction = (options?: any, body?: any, givenExtraOptions?: ExtraOptions) => Api.call(route, options, body, mergedOptions(givenExtraOptions));
 
