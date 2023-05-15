@@ -25,4 +25,5 @@ export interface ApiItem {
 export interface GeneratedApi {
     [routeName: string]: ApiItem;
 }
-export declare const makeApi: (apiPool?: ApiPool, prefix?: string, extraOptions?: ExtraOptions) => GeneratedApi;
+export declare type Prefix = string | (() => string);
+export declare const makeApi: (apiPool?: ApiPool, prefix?: Prefix, extraOptions?: ExtraOptions) => GeneratedApi;

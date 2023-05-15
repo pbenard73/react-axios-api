@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { mergeDeepLeft } from 'ramda'
+import mergeDeepLeft from 'ramda/src/mergeDeepLeft'
 
 import Api from "./Api";
 
@@ -18,31 +18,33 @@ export interface ApiPool {
 }
 
 export interface HookItem {
-  isCalling:boolean
+  isCalling: boolean
   data: any | null
   error: any | null
 }
 
 export interface ExtraOptions {
-  [name:string]: any
+  [name: string]: any
 }
 
 export interface ApiItem {
   (options?: any, body?: any, givenExtraOptions?: ExtraOptions): Promise<any>
-  url(options?: any):string
+  url(options?: any): string
   useHook(options?: any, body?: any, givenExtraOptions?: any): HookItem
 }
 
 export interface GeneratedApi {
-  [routeName:string]: ApiItem
+  [routeName: string]: ApiItem
 }
 
-const makeApiFx = (apiPool:ApiPool = {}, prefix:string = "", extraOptions:ExtraOptions = {}):GeneratedApi => {
-  let data:GeneratedApi = {};
+export type Prefix = string | (() => string)
+
+const makeApiFx = (apiPool: ApiPool = {}, prefix: Prefix = "", extraOptions: ExtraOptions = {}): GeneratedApi => {
+  let data: GeneratedApi = {};
 
   Object.keys(apiPool).forEach((routeName) => {
-    const route = {...apiPool[routeName]};
-    route.path = prefix + route.path;
+    const route = { ...apiPool[routeName] };
+    route.path = (typeof prefix === 'string' ? prefix : prefix()) + route.path;
 
     const mergedOptions = (givenOptions = {}) => mergeDeepLeft(extraOptions, givenOptions)
 
