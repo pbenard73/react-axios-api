@@ -42,15 +42,16 @@ export type Prefix = string | (() => string)
 const makeApiFx = (apiPool: ApiPool = {}, prefix: Prefix = "", extraOptions: ExtraOptions = {}): GeneratedApi => {
   let data: GeneratedApi = {};
 
+  const cleanRoute = (route:any) => ({...route, path: (typeof prefix === 'string' ? prefix : prefix()) + route.path})
+
   Object.keys(apiPool).forEach((routeName) => {
     const route = { ...apiPool[routeName] };
-    route.path = (typeof prefix === 'string' ? prefix : prefix()) + route.path;
 
     const mergedOptions = (givenOptions = {}) => mergeDeepLeft(extraOptions, givenOptions)
 
-    const callFunction = (options?: any, body?: any, givenExtraOptions?: ExtraOptions) => Api.call(route, options, body, mergedOptions(givenExtraOptions));
+    const callFunction = (options?: any, body?: any, givenExtraOptions?: ExtraOptions) => Api.call(cleanRoute(route), options, body, mergedOptions(givenExtraOptions));
 
-    callFunction.url = (options?: any) => Api.url(route, options);
+    callFunction.url = (options?: any) => Api.url(cleanRoute(route), options);
 
     callFunction.useHook = (options?: any, body?: any, givenExtraOptions?: any) => {
       const [calling, setCalling] = useState(true);
@@ -58,7 +59,7 @@ const makeApiFx = (apiPool: ApiPool = {}, prefix: Prefix = "", extraOptions: Ext
       const [error, setError] = useState();
 
       useEffect(() => {
-        Api.call(route, options, body, mergedOptions(givenExtraOptions))
+        Api.call(cleanRoute(route), options, body, mergedOptions(givenExtraOptions))
           .then((apidata) => setSuccess(apidata))
           .catch((e) => setError(e))
           .finally(() => setCalling(false));
