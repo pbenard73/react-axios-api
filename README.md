@@ -20,6 +20,11 @@ const api ={
 export default api
 
 export const { main, second, third, quatro } = makeApi(api, 'localhost:5000')
+
+/**
+ * Base path can be a function to dynamically change host request. 
+ */
+// export const { main, second, third, quatro } = makeApi(api, () => 'localhost:5000')
 ```
 
 ## Explanations

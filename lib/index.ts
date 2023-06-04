@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import mergeDeepLeft from 'ramda/src/mergeDeepLeft'
+import { mergeDeepLeft } from 'ramda'
 
 import Api from "./Api";
 
@@ -42,7 +42,7 @@ export type Prefix = string | (() => string)
 const makeApiFx = (apiPool: ApiPool = {}, prefix: Prefix = "", extraOptions: ExtraOptions = {}): GeneratedApi => {
   let data: GeneratedApi = {};
 
-  const cleanRoute = (route:any) => ({...route, path: (typeof prefix === 'string' ? prefix : prefix()) + route.path})
+  const cleanRoute = (route: any) => ({ ...route, path: (typeof prefix === 'string' ? prefix : prefix()) + route.path })
 
   Object.keys(apiPool).forEach((routeName) => {
     const route = { ...apiPool[routeName] };
