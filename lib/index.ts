@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { mergeDeepLeft } from 'ramda'
+import mergeDeepLeft from 'ramda/es/mergeDeepLeft'
 
 import Api from "./Api";
 
