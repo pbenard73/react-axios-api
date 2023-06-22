@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import mergeDeepLeft from 'ramda/es/mergeDeepLeft'
+import {mergeDeepLeft} from 'ramda'
 
 import Api from "./Api";
 
@@ -24,6 +24,7 @@ export interface HookItem {
 }
 
 export interface ExtraOptions {
+  parseData?: (data:any) => any
   [name: string]: any
 }
 

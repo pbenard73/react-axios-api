@@ -15,6 +15,7 @@ export interface HookItem {
     error: any | null;
 }
 export interface ExtraOptions {
+    parseData?: (data: any) => any;
     [name: string]: any;
 }
 export interface ApiItem {
