@@ -97,3 +97,102 @@ const App = () => {
 
 ```
 
+## Usage with Symfony React
+
+### Create a the route.json
+
+*assets/routes/stock.json*
+
+```
+{
+    "index": {"path":"/", "method":"get"},
+    "stockGetNumber": {"path":"/stock/getNumber", "method":"post"},
+    "stockRandom": {"path":"/stock/stockRandom", "method":"post"},
+    "getDate": {"path":"/stock/getDate", "method":"get"}
+}
+```
+
+### Override controller
+
+*src/Controller/StockController.php*
+
+```php
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class StockController extends AbstractController
+{
+  /**
+   *  Link the stock.json routes here
+   */
+    public static $api = __DIR__ . './../../assets/routes/stock.json*';
+
+    public function index(): Response
+    {
+        return $this->render('stock/index.html.twig', [
+            'controller_name' => 'StockController',
+        ]);
+    }
+    
+    public function stockGetNumber(): Response
+    {
+        $data = rand();
+
+        return new JsonResponse($data);
+    }
+
+    public function stockRandom(): Response {
+        return new JsonResponse('coucou ta mere');
+    }
+
+    public function getDate():Response {
+        return new JsonResponse(date('d-m-y h:i:s'));
+    }
+}
+```
+
+### Register routes
+
+*config/routes.php*
+
+```php
+<?php
+
+use App\Controller\StockController;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+return function (RoutingConfigurator $routes): void {
+  /**
+   *  Register your controller here
+   */
+    $controllers = [
+        StockController::class
+    ];
+
+    foreach($controllers as $controller) {
+        $currentRoutes = json_decode(file_get_contents($controller::$api));
+      
+        foreach($currentRoutes as $routeName => $pathData) {
+            $routes
+            ->add($routeName, $pathData->path)
+            ->controller([$controller, $routeName])
+            ->methods([$pathData->method]);
+        }
+    };
+};
+```
+
+### Inside the react project
+
+```js
+import { makeApi } from "react-axios-api";
+import routes from './../routes/stock.json'
+
+export const { stockGetNumber, stockRandom, getDate } = makeApi(routes)
+```
