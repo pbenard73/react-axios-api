@@ -59,11 +59,10 @@ class Api {
         return getUrl(route, options);
     }
     call(route, options = {}, body = {}, givenExtraOptions = {}) {
-        let axiosCall;
+        const axios = new axios_1.default.Axios();
         const controller = new AbortController();
-        console.log("PIZZA", axios_1.default);
         const newCall = new Promise((resolve, reject) => {
-            return axios_1.default
+            return axios
                 .request(getRequestOptions(route, options, body, givenExtraOptions, { signal: controller.signal }))
                 .then((response) => {
                 if ([200, 201].indexOf(response.status) === -1) {
