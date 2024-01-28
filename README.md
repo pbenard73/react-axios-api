@@ -1,5 +1,19 @@
 # react-axios-api
 
+## V2
+
+Set the axios Instance at root project
+
+```js
+//index.js
+
+import { setAxios } from "react-axios-api";
+import axios from "axios";
+
+setAxios(axios)
+
+```
+
 ## Declare Api
 
 ```js
