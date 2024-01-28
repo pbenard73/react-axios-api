@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.makeApi = void 0;
+exports.setAxios = exports.makeApi = void 0;
 const react_1 = require("react");
 const ramda_1 = require("ramda");
 const Api_1 = __importDefault(require("./Api"));
@@ -32,3 +32,7 @@ const makeApiFx = (apiPool = {}, prefix = "", extraOptions = {}) => {
     return data;
 };
 exports.makeApi = makeApiFx;
+const setAxios = (axios) => {
+    Api_1.default.setAxios(axios);
+};
+exports.setAxios = setAxios;

@@ -54,14 +54,16 @@ function getRequestOptions(route, options = {}, givenBody = {}, givenExtraOption
         data, withCredentials: true }, (route.options || {})), extraOptions), others);
 }
 class Api {
+    setAxios(givenAxios) {
+        this.axios = givenAxios;
+    }
     url(route, options = {}) {
         return getUrl(route, options);
     }
     call(route, options = {}, body = {}, givenExtraOptions = {}) {
-        const axios = require("axios");
         const controller = new AbortController();
         const newCall = new Promise((resolve, reject) => {
-            return axios
+            return this.axios
                 .request(getRequestOptions(route, options, body, givenExtraOptions, { signal: controller.signal }))
                 .then((response) => {
                 if ([200, 201].indexOf(response.status) === -1) {

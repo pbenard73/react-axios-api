@@ -80,3 +80,6 @@ const makeApiFx = (apiPool: ApiPool = {}, prefix: Prefix = "", extraOptions: Ext
 };
 
 export const makeApi = makeApiFx;
+export const setAxios = (axios: any) => {
+  Api.setAxios(axios);
+};

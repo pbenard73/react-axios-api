@@ -28,3 +28,4 @@ export interface GeneratedApi {
 }
 export type Prefix = string | (() => string);
 export declare const makeApi: (apiPool?: ApiPool, prefix?: Prefix, extraOptions?: ExtraOptions) => GeneratedApi;
+export declare const setAxios: (axios: any) => void;
