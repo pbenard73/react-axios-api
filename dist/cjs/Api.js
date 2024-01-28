@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOptions = void 0;
-const axios_1 = __importDefault(require("axios"));
 const stringify_1 = __importDefault(require("qs/lib/stringify"));
 function getUrl(route, givenOptions = {}) {
     if (typeof route === "string") {
@@ -59,7 +58,7 @@ class Api {
         return getUrl(route, options);
     }
     call(route, options = {}, body = {}, givenExtraOptions = {}) {
-        const axios = new axios_1.default.Axios();
+        const axios = require("axios");
         const controller = new AbortController();
         const newCall = new Promise((resolve, reject) => {
             return axios
