@@ -3,9 +3,18 @@
   "version": "1.1.14",
   "description": "React toolkit for api querying with axios",
   "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc;rm -rf ./dist; ./node_modules/webpack/bin/webpack.js;cp build/*.d.ts dist/.; rm -rf build"
+    "build": "tsc"
   },
   "keywords": [
     "react",
